@@ -16,7 +16,7 @@ def get_connection():
 
     return conn
 
-def init_db():
+def db_init():
     conn = get_connection()
     cur= conn.cursor()
     cur.execute ("""
