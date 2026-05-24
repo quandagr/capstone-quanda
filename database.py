@@ -6,7 +6,7 @@ load_dotenv()
 def get_connection():
     conn=psycopg2.connect(
         host = os.getenv("DB.HOST"),
-        post = os.getenv ("DB_PORT"),
+        port = os.getenv ("DB_PORT"),
         dbname= os.getenv ("DB_NAME"),
         user = os.getenv ("DB_USER"),
         password = os.getenv ("DB_PASS"),
