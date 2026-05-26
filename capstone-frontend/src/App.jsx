@@ -31,7 +31,12 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    fetchProducts()
+    let active = true
+    async function load() {
+      if (active) await fetchProducts()
+    }
+    load()
+    return () => { active = false }
   }, [fetchProducts])
 
   async function handleDelete(id) {
@@ -52,7 +57,24 @@ export default function App() {
 
         {/* Header */}
         <header className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white tracking-tight">
+          <h1
+            className="font-bold tracking-tight"
+            style={{
+              fontSize: '30px',
+              color: '#f8fafc',
+              WebkitTextStroke: '1px #4b5563',
+              textShadow: `
+                1px 1px 0px #374151,
+                2px 2px 0px #374151,
+                3px 3px 0px #111827,
+                4px 4px 0px #111827,
+                5px 5px 0px #030712,
+                6px 6px 8px rgba(0,0,0,0.4)
+              `,
+              transform: 'perspective(300px) rotateX(8deg)',
+              display: 'inline-block',
+            }}
+          >
             Product Dashboard
           </h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">

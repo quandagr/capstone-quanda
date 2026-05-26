@@ -32,10 +32,10 @@ def create_product():
         data = request.get_json()
         cur.execute("""
                     insert into products
-                    (product_id, product_name, price, quantity)
+                    (product_name, price, quantity)
                     values 
-                    (%s, %s, %s, %s)
-            """, (data["product_id"], data["product_name"] , data["price"], data["quantity"]))
+                    (%s, %s, %s)
+            """, ( data["product_name"] , data["price"], data["quantity"]))
         conn.commit()
         cur.close()
         conn.close()
