@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const EMPTY = { product_id: '', product_name: '', price: '', quantity: '' }
+const EMPTY = { product_name: '', price: '', quantity: '' }
 
 export default function ProductForm({ onProductAdded }) {
   const [form, setForm] = useState(EMPTY)
@@ -20,7 +20,6 @@ export default function ProductForm({ onProductAdded }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          product_id: Number(form.product_id),
           product_name: form.product_name,
           price: parseFloat(form.price),
           quantity: parseInt(form.quantity, 10),
@@ -40,88 +39,21 @@ export default function ProductForm({ onProductAdded }) {
   }
 
   return (
-    <div
-      style={{
-        background: '#6d28d9',
-        border: '1px solid #e5e7eb',
-        borderRadius: '16px',
-        padding: '24px',
-        transform: 'perspective(800px) rotateX(2deg) rotateY(-1deg)',
-        boxShadow: `
-          0 2px 0px #f9fafb,
-          0 4px 0px #f3f4f6,
-          0 6px 0px #e5e7eb,
-          0 8px 0px #d1d5db,
-          0 10px 0px #9ca3af,
-          0 12px 20px rgba(0,0,0,0.4),
-          inset 0 1px 0 rgba(255,255,255,0.8)
-        `,
-        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-      }}
-      onMouseEnter={e => {
-        e.currentTarget.style.transform = 'perspective(800px) rotateX(1deg) rotateY(0deg) translateY(-4px)'
-        e.currentTarget.style.boxShadow = `
-          0 2px 0px #f9fafb,
-          0 4px 0px #f3f4f6,
-          0 6px 0px #e5e7eb,
-          0 8px 0px #d1d5db,
-          0 10px 0px #9ca3af,
-          0 16px 30px rgba(0,0,0,0.5),
-          inset 0 1px 0 rgba(255,255,255,0.8)
-        `
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.transform = 'perspective(800px) rotateX(2deg) rotateY(-1deg)'
-        e.currentTarget.style.boxShadow = `
-          0 2px 0px #f9fafb,
-          0 4px 0px #f3f4f6,
-          0 6px 0px #e5e7eb,
-          0 8px 0px #d1d5db,
-          0 10px 0px #9ca3af,
-          0 12px 20px rgba(0,0,0,0.4),
-          inset 0 1px 0 rgba(255,255,255,0.8)
-        `
-      }}
-    >
-      <h2
-        className="text-lg font-semibold italic mb-5"
-        style={{
-          background: 'linear-gradient(135deg, #f9fafb, #9ca3af, #6b7280)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text',
-        }}
-      >
+    <div className="bg-gradient-to-br from-purple-950 via-gray-900 to-gray-800 border border-purple-800/40 rounded-2xl p-6 shadow-[6px_6px_0px_0px_rgba(109,40,217,0.4)] hover:shadow-[8px_8px_0px_0px_rgba(109,40,217,0.5)] transition-shadow duration-200">
+      <h2 className="text-lg font-semibold italic mb-5 bg-gradient-to-r from-gray-400 via-gray-200 to-gray-500 bg-clip-text text-transparent">
         Add New Product
       </h2>
 
       {error && (
-        <p role="alert" className="mb-4 text-sm text-red-600 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg px-4 py-2">
+        <p role="alert" className="mb-4 text-sm text-red-400 bg-red-950/40 border border-red-800/50 rounded-lg px-4 py-2">
           {error}
         </p>
       )}
 
       <form onSubmit={handleSubmit} noValidate>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
           <div className="flex flex-col gap-1">
-            <label htmlFor="product_id" className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
-              Product ID
-            </label>
-            <input
-              id="product_id"
-              name="product_id"
-              type="number"
-              min="1"
-              placeholder="e.g. 101"
-              value={form.product_id}
-              onChange={handleChange}
-              required
-              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-400"
-            />
-          </div>
-
-          <div className="flex flex-col gap-1">
-            <label htmlFor="product_name" className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <label htmlFor="product_name" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
               Product Name
             </label>
             <input
@@ -132,12 +64,12 @@ export default function ProductForm({ onProductAdded }) {
               value={form.product_name}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-400"
+              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="price" className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <label htmlFor="price" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
               Price ($)
             </label>
             <input
@@ -150,12 +82,12 @@ export default function ProductForm({ onProductAdded }) {
               value={form.price}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-400"
+              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="quantity" className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+            <label htmlFor="quantity" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
               Quantity
             </label>
             <input
@@ -167,7 +99,7 @@ export default function ProductForm({ onProductAdded }) {
               value={form.quantity}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-400"
+              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
             />
           </div>
         </div>

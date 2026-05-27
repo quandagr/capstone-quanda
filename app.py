@@ -11,7 +11,7 @@ CORS(app, origins ="*")
 app.register_blueprint(products, url_prefix = "/products")
 @app.route("/")
 @app.route("/<path:path>")
-def serve_front_end():
+def serve_front_end(path=""):
     return app.send_static_file("index.html")
 
 @app.route("/health")

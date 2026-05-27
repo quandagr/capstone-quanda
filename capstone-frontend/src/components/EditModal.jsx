@@ -1,7 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
 
 export default function EditModal({ product, onClose, onUpdated }) {
-  const [form, setForm] = useState({ ...product })
+  const [form, setForm] = useState({
+    product_name: product.product_name,
+    price: product.price,
+    quantity: product.quantity,
+  })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
   const dialogRef = useRef(null)
@@ -28,7 +32,6 @@ export default function EditModal({ product, onClose, onUpdated }) {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          product_id: Number(form.product_id),
           product_name: form.product_name,
           price: parseFloat(form.price),
           quantity: parseInt(form.quantity, 10),
@@ -68,9 +71,12 @@ export default function EditModal({ product, onClose, onUpdated }) {
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-5">
-          <h2 id="modal-title" className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            Edit Product
-          </h2>
+          <div>
+            <h2 id="modal-title" className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+              Edit Product
+            </h2>
+            <p className="text-xs text-gray-400 mt-0.5">ID: {product.product_id}</p>
+          </div>
           <button
             onClick={onClose}
             aria-label="Close modal"
@@ -87,21 +93,7 @@ export default function EditModal({ product, onClose, onUpdated }) {
         )}
 
         <form onSubmit={handleSubmit} noValidate>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-            <div className="flex flex-col gap-1">
-              <label htmlFor="edit_product_id" className={labelClass}>Product ID</label>
-              <input
-                id="edit_product_id"
-                name="product_id"
-                type="number"
-                min="1"
-                value={form.product_id}
-                onChange={handleChange}
-                required
-                className={inputClass}
-              />
-            </div>
-
+          <div className="flex flex-col gap-4 mb-6">
             <div className="flex flex-col gap-1">
               <label htmlFor="edit_product_name" className={labelClass}>Product Name</label>
               <input
@@ -115,33 +107,35 @@ export default function EditModal({ product, onClose, onUpdated }) {
               />
             </div>
 
-            <div className="flex flex-col gap-1">
-              <label htmlFor="edit_price" className={labelClass}>Price ($)</label>
-              <input
-                id="edit_price"
-                name="price"
-                type="number"
-                min="0"
-                step="0.01"
-                value={form.price}
-                onChange={handleChange}
-                required
-                className={inputClass}
-              />
-            </div>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex flex-col gap-1">
+                <label htmlFor="edit_price" className={labelClass}>Price ($)</label>
+                <input
+                  id="edit_price"
+                  name="price"
+                  type="number"
+                  min="0"
+                  step="0.01"
+                  value={form.price}
+                  onChange={handleChange}
+                  required
+                  className={inputClass}
+                />
+              </div>
 
-            <div className="flex flex-col gap-1">
-              <label htmlFor="edit_quantity" className={labelClass}>Quantity</label>
-              <input
-                id="edit_quantity"
-                name="quantity"
-                type="number"
-                min="0"
-                value={form.quantity}
-                onChange={handleChange}
-                required
-                className={inputClass}
-              />
+              <div className="flex flex-col gap-1">
+                <label htmlFor="edit_quantity" className={labelClass}>Quantity</label>
+                <input
+                  id="edit_quantity"
+                  name="quantity"
+                  type="number"
+                  min="0"
+                  value={form.quantity}
+                  onChange={handleChange}
+                  required
+                  className={inputClass}
+                />
+              </div>
             </div>
           </div>
 
