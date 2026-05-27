@@ -5,6 +5,8 @@ export default function EditModal({ product, onClose, onUpdated }) {
     product_name: product.product_name,
     price: product.price,
     quantity: product.quantity,
+    color: product.color || '',
+    size: product.size ?? '',
   })
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
@@ -35,6 +37,8 @@ export default function EditModal({ product, onClose, onUpdated }) {
           product_name: form.product_name,
           price: parseFloat(form.price),
           quantity: parseInt(form.quantity, 10),
+          color: form.color || null,
+          size: form.size ? parseInt(form.size, 10) : null,
         }),
       })
       if (!res.ok) {
@@ -133,6 +137,33 @@ export default function EditModal({ product, onClose, onUpdated }) {
                   value={form.quantity}
                   onChange={handleChange}
                   required
+                  className={inputClass}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="edit_color" className={labelClass}>Color</label>
+                <input
+                  id="edit_color"
+                  name="color"
+                  type="text"
+                  placeholder="e.g. Red"
+                  value={form.color}
+                  onChange={handleChange}
+                  className={inputClass}
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <label htmlFor="edit_size" className={labelClass}>Size</label>
+                <input
+                  id="edit_size"
+                  name="size"
+                  type="number"
+                  min="0"
+                  placeholder="e.g. 10"
+                  value={form.size}
+                  onChange={handleChange}
                   className={inputClass}
                 />
               </div>

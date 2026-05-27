@@ -1,6 +1,12 @@
 import { useState } from 'react'
 
-const EMPTY = { product_name: '', price: '', quantity: '' }
+const EMPTY = { product_name: '', price: '', quantity: '', color: '', size: '' }
+
+const inputClass =
+  'px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600'
+
+const labelClass =
+  'text-xs font-semibold uppercase tracking-wide text-purple-300'
 
 export default function ProductForm({ onProductAdded }) {
   const [form, setForm] = useState(EMPTY)
@@ -23,6 +29,8 @@ export default function ProductForm({ onProductAdded }) {
           product_name: form.product_name,
           price: parseFloat(form.price),
           quantity: parseInt(form.quantity, 10),
+          color: form.color || null,
+          size: form.size ? parseInt(form.size, 10) : null,
         }),
       })
       if (!res.ok) {
@@ -51,27 +59,23 @@ export default function ProductForm({ onProductAdded }) {
       )}
 
       <form onSubmit={handleSubmit} noValidate>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-5">
           <div className="flex flex-col gap-1">
-            <label htmlFor="product_name" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
-              Product Name
-            </label>
+            <label htmlFor="product_name" className={labelClass}>Product Name</label>
             <input
               id="product_name"
               name="product_name"
               type="text"
-              placeholder="e.g. Widget Pro"
+              placeholder="e.g. Sneaker"
               value={form.product_name}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
+              className={inputClass}
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="price" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
-              Price ($)
-            </label>
+            <label htmlFor="price" className={labelClass}>Price ($)</label>
             <input
               id="price"
               name="price"
@@ -82,14 +86,12 @@ export default function ProductForm({ onProductAdded }) {
               value={form.price}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
+              className={inputClass}
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="quantity" className="text-xs font-semibold uppercase tracking-wide text-purple-300">
-              Quantity
-            </label>
+            <label htmlFor="quantity" className={labelClass}>Quantity</label>
             <input
               id="quantity"
               name="quantity"
@@ -99,7 +101,34 @@ export default function ProductForm({ onProductAdded }) {
               value={form.quantity}
               onChange={handleChange}
               required
-              className="px-3 py-2 rounded-lg border border-purple-800/50 bg-gray-900/60 text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition placeholder-gray-600"
+              className={inputClass}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="color" className={labelClass}>Color</label>
+            <input
+              id="color"
+              name="color"
+              type="text"
+              placeholder="e.g. Red"
+              value={form.color}
+              onChange={handleChange}
+              className={inputClass}
+            />
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <label htmlFor="size" className={labelClass}>Size</label>
+            <input
+              id="size"
+              name="size"
+              type="number"
+              min="0"
+              placeholder="e.g. 10"
+              value={form.size}
+              onChange={handleChange}
+              className={inputClass}
             />
           </div>
         </div>

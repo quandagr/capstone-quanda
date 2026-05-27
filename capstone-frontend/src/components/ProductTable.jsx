@@ -81,6 +81,14 @@ export default function ProductTable({ products, loading, error, onEdit, onDelet
                         <span className="text-xs uppercase tracking-wide text-purple-300 font-semibold">Quantity</span>
                         <p className="text-gray-200 font-medium mt-0.5">{p.quantity}</p>
                       </div>
+                      <div>
+                        <span className="text-xs uppercase tracking-wide text-purple-300 font-semibold">Color</span>
+                        <p className="text-gray-200 font-medium mt-0.5">{p.color || '—'}</p>
+                      </div>
+                      <div>
+                        <span className="text-xs uppercase tracking-wide text-purple-300 font-semibold">Size</span>
+                        <p className="text-gray-200 font-medium mt-0.5">{p.size ?? '—'}</p>
+                      </div>
                       <div className="flex gap-2 ml-auto">
                         <button
                           onClick={() => onEdit(p)}

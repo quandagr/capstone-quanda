@@ -25,11 +25,15 @@ def db_init():
                  product_id serial primary key,
                  product_name varchar (50),
                  price int,
-                 quantity int,
-                 color varchar (50),
-                 size int
+                 quantity int
                  )
                """)
+    # Add color and size columns if they don't exist yet
+    cur.execute("""
+        alter table products
+        add column if not exists color varchar(50),
+        add column if not exists size int
+    """)
     conn.commit() 
     cur.close()
     conn.close()
