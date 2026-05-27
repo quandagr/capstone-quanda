@@ -56,9 +56,11 @@ def update_product(id):
                     set 
                         product_name = %s,
                         price = %s,
-                        quantity = %s
+                        quantity = %s,
+                        color = %,
+                        size = %
                     where product_id = %s
-            """, (data["product_name"], data["price"], data["quantity"], data["color"], data["size"] id))
+            """, (data["product_name"], data["price"], data["quantity"], id))
         conn.commit()
         cur.close()
         conn.close()

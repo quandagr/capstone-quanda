@@ -25,7 +25,9 @@ def db_init():
                  product_id serial primary key,
                  product_name varchar (50),
                  price int,
-                 quantity int
+                 quantity int,
+                 color varchar (50),
+                 size int
                  )
                """)
     conn.commit() 
