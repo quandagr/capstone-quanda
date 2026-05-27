@@ -40,8 +40,58 @@ export default function ProductForm({ onProductAdded }) {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 shadow-sm">
-      <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5">
+    <div
+      style={{
+        background: '#6d28d9',
+        border: '1px solid #e5e7eb',
+        borderRadius: '16px',
+        padding: '24px',
+        transform: 'perspective(800px) rotateX(2deg) rotateY(-1deg)',
+        boxShadow: `
+          0 2px 0px #f9fafb,
+          0 4px 0px #f3f4f6,
+          0 6px 0px #e5e7eb,
+          0 8px 0px #d1d5db,
+          0 10px 0px #9ca3af,
+          0 12px 20px rgba(0,0,0,0.4),
+          inset 0 1px 0 rgba(255,255,255,0.8)
+        `,
+        transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.transform = 'perspective(800px) rotateX(1deg) rotateY(0deg) translateY(-4px)'
+        e.currentTarget.style.boxShadow = `
+          0 2px 0px #f9fafb,
+          0 4px 0px #f3f4f6,
+          0 6px 0px #e5e7eb,
+          0 8px 0px #d1d5db,
+          0 10px 0px #9ca3af,
+          0 16px 30px rgba(0,0,0,0.5),
+          inset 0 1px 0 rgba(255,255,255,0.8)
+        `
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.transform = 'perspective(800px) rotateX(2deg) rotateY(-1deg)'
+        e.currentTarget.style.boxShadow = `
+          0 2px 0px #f9fafb,
+          0 4px 0px #f3f4f6,
+          0 6px 0px #e5e7eb,
+          0 8px 0px #d1d5db,
+          0 10px 0px #9ca3af,
+          0 12px 20px rgba(0,0,0,0.4),
+          inset 0 1px 0 rgba(255,255,255,0.8)
+        `
+      }}
+    >
+      <h2
+        className="text-lg font-semibold italic mb-5"
+        style={{
+          background: 'linear-gradient(135deg, #f9fafb, #9ca3af, #6b7280)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+        }}
+      >
         Add New Product
       </h2>
 

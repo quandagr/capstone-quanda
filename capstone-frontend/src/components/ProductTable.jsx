@@ -1,4 +1,12 @@
+import { useState } from 'react'
+
 export default function ProductTable({ products, loading, error, onEdit, onDelete }) {
+  const [openRow, setOpenRow] = useState(null)
+
+  function toggleRow(id) {
+    setOpenRow(prev => (prev === id ? null : id))
+  }
+
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center gap-3 py-16 border border-gray-200 dark:border-gray-700 rounded-2xl text-gray-500 dark:text-gray-400">
@@ -29,50 +37,69 @@ export default function ProductTable({ products, loading, error, onEdit, onDelet
       <table className="w-full text-sm text-left" aria-label="Products">
         <thead className="bg-gray-100 dark:bg-gray-800 text-xs uppercase tracking-wider text-gray-500 dark:text-gray-400">
           <tr>
-            <th scope="col" className="px-5 py-3 font-semibold">ID</th>
             <th scope="col" className="px-5 py-3 font-semibold">Name</th>
             <th scope="col" className="px-5 py-3 font-semibold">Price</th>
-            <th scope="col" className="px-5 py-3 font-semibold">Quantity</th>
-            <th scope="col" className="px-5 py-3 font-semibold">Actions</th>
+            <th scope="col" className="px-5 py-3 font-semibold w-10"></th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100 dark:divide-gray-700 bg-white dark:bg-gray-800">
+        <tbody className="divide-y divide-gray-200 dark:divide-gray-700 bg-gray-50 dark:bg-gray-800">
           {products.map((p) => (
-            <tr
-              key={p.product_id}
-              className="hover:bg-violet-50 dark:hover:bg-violet-900/10 transition"
-            >
-              <td className="px-5 py-4 text-gray-700 dark:text-gray-300 font-mono">
-                {p.product_id}
-              </td>
-              <td className="px-5 py-4 text-gray-900 dark:text-gray-100 font-medium">
-                {p.product_name}
-              </td>
-              <td className="px-5 py-4 text-gray-700 dark:text-gray-300">
-                ${Number(p.price).toFixed(2)}
-              </td>
-              <td className="px-5 py-4 text-gray-700 dark:text-gray-300">
-                {p.quantity}
-              </td>
-              <td className="px-5 py-4">
-                <div className="flex gap-2">
+            <>
+              {/* Main row */}
+              <tr
+                key={p.product_id}
+                className="hover:bg-violet-50 dark:hover:bg-violet-900/10 transition"
+              >
+                <td className="px-5 py-4 text-gray-900 dark:text-gray-100 font-medium">
+                  {p.product_name}
+                </td>
+                <td className="px-5 py-4 text-gray-700 dark:text-gray-300">
+                  ${Number(p.price).toFixed(2)}
+                </td>
+                <td className="px-5 py-4">
                   <button
-                    onClick={() => onEdit(p)}
-                    aria-label={`Edit ${p.product_name}`}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                    onClick={() => toggleRow(p.product_id)}
+                    aria-label={`Toggle details for ${p.product_name}`}
+                    aria-expanded={openRow === p.product_id}
+                    className="flex flex-col gap-1 p-1.5 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition"
                   >
-                    Edit
+                    <span className="block w-4 h-0.5 bg-gray-600 dark:bg-gray-300 rounded" />
+                    <span className="block w-4 h-0.5 bg-gray-600 dark:bg-gray-300 rounded" />
+                    <span className="block w-4 h-0.5 bg-gray-600 dark:bg-gray-300 rounded" />
                   </button>
-                  <button
-                    onClick={() => onDelete(p.product_id)}
-                    aria-label={`Delete ${p.product_name}`}
-                    className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 transition"
-                  >
-                    Delete
-                  </button>
-                </div>
-              </td>
-            </tr>
+                </td>
+              </tr>
+
+              {/* Expanded row */}
+              {openRow === p.product_id && (
+                <tr className="bg-violet-50 dark:bg-violet-900/10">
+                  <td colSpan={3} className="px-5 py-4">
+                    <div className="flex flex-wrap items-center gap-6">
+                      <div>
+                        <span className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 font-semibold">Quantity</span>
+                        <p className="text-gray-800 dark:text-gray-200 font-medium mt-0.5">{p.quantity}</p>
+                      </div>
+                      <div className="flex gap-2 ml-auto">
+                        <button
+                          onClick={() => onEdit(p)}
+                          aria-label={`Edit ${p.product_name}`}
+                          className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-600 transition"
+                        >
+                          Edit
+                        </button>
+                        <button
+                          onClick={() => onDelete(p.product_id)}
+                          aria-label={`Delete ${p.product_name}`}
+                          className="px-3 py-1.5 text-xs font-semibold rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-900/40 transition"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              )}
+            </>
           ))}
         </tbody>
       </table>

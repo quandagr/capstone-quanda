@@ -52,7 +52,7 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-10 px-4">
+    <div className="min-h-screen bg-gray-800 dark:bg-gray-900 py-10 px-4">
       <div className="max-w-5xl mx-auto flex flex-col gap-8">
 
         {/* Header */}
@@ -60,9 +60,9 @@ export default function App() {
           <h1
             className="font-bold tracking-tight"
             style={{
-              fontSize: '30px',
-              color: '#f8fafc',
-              WebkitTextStroke: '1px #4b5563',
+              fontSize: '48px',
+              color: '#1f2937',
+              WebkitTextStroke: '1px #d1d5db',
               textShadow: `
                 1px 1px 0px #374151,
                 2px 2px 0px #374151,
@@ -91,9 +91,59 @@ export default function App() {
         />
 
         {/* Product list */}
-        <section>
+        <section
+          style={{
+            background: '#6d28d9',
+            border: '1px solid #e5e7eb',
+            borderRadius: '16px',
+            padding: '24px',
+            transform: 'perspective(800px) rotateX(2deg) rotateY(-1deg)',
+            boxShadow: `
+              0 2px 0px #f9fafb,
+              0 4px 0px #f3f4f6,
+              0 6px 0px #e5e7eb,
+              0 8px 0px #d1d5db,
+              0 10px 0px #9ca3af,
+              0 12px 20px rgba(0,0,0,0.4),
+              inset 0 1px 0 rgba(255,255,255,0.8)
+            `,
+            transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.transform = 'perspective(800px) rotateX(1deg) rotateY(0deg) translateY(-4px)'
+            e.currentTarget.style.boxShadow = `
+              0 2px 0px #f9fafb,
+              0 4px 0px #f3f4f6,
+              0 6px 0px #e5e7eb,
+              0 8px 0px #d1d5db,
+              0 10px 0px #9ca3af,
+              0 16px 30px rgba(0,0,0,0.5),
+              inset 0 1px 0 rgba(255,255,255,0.8)
+            `
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.transform = 'perspective(800px) rotateX(2deg) rotateY(-1deg)'
+            e.currentTarget.style.boxShadow = `
+              0 2px 0px #f9fafb,
+              0 4px 0px #f3f4f6,
+              0 6px 0px #e5e7eb,
+              0 8px 0px #d1d5db,
+              0 10px 0px #9ca3af,
+              0 12px 20px rgba(0,0,0,0.4),
+              inset 0 1px 0 rgba(255,255,255,0.8)
+            `
+          }}
+        >
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
+            <h2
+              className="text-xl font-semibold italic"
+              style={{
+                background: 'linear-gradient(135deg, #f9fafb, #9ca3af, #6b7280)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
               All Products
             </h2>
             <button
