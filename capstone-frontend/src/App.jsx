@@ -58,24 +58,18 @@ export default function App() {
         {/* Header */}
         <header className="text-center">
           <h1
-            className="font-bold tracking-tight"
+            className="font-bold tracking-tight cursor-default transition-transform duration-300 ease-out hover:scale-110 inline-block"
             style={{
-              fontSize: '48px',
-              color: '#1f2937',
-              WebkitTextStroke: '1px #d1d5db',
-              textShadow: `
-                1px 1px 0px #374151,
-                2px 2px 0px #374151,
-                3px 3px 0px #111827,
-                4px 4px 0px #111827,
-                5px 5px 0px #030712,
-                6px 6px 8px rgba(0,0,0,0.4)
-              `,
-              transform: 'perspective(300px) rotateX(8deg)',
-              display: 'inline-block',
+              fontSize: '70px',
+              background: 'linear-gradient(135deg, #7c3aed, #a78bfa, #c4b5fd, #9ca3af, #e5e7eb, #a78bfa, #7c3aed)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: 'none',
+              filter: 'drop-shadow(2px 4px 6px rgba(109,40,217,0.5))',
             }}
           >
-            Product Dashboard
+            Grant's Showroom
           </h1>
           <p className="mt-2 text-gray-500 dark:text-gray-400">
             Manage your product inventory
