@@ -6,7 +6,7 @@ from routes.products import products
 
 db_init()
 
-app = Flask(__name__, static_folder = "dist", static_url_path="")
+app = Flask(__name__, static_folder = "capstone-frontend/dist", static_url_path="")
 CORS(app, origins ="*")
 app.register_blueprint(products, url_prefix = "/products")
 @app.route("/")
