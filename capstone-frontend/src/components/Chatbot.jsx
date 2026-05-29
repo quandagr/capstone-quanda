@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 export default function Chatbot() {
   const [open, setOpen] = useState(false)
   const [messages, setMessages] = useState([
-    { role: 'bot', text: "Hey! I'm Grant's assistant. Ask me about products, prices, or inventory." }
+    { role: 'bot', text: "Hey! I'm Amity, Grant's assistant. Ask me about products, prices, or inventory." }
   ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -80,7 +80,7 @@ export default function Chatbot() {
         <div className="fixed bottom-24 right-6 z-50 w-80 h-96 flex flex-col rounded-2xl border border-purple-800/40 bg-gradient-to-br from-purple-950 via-gray-900 to-gray-800 shadow-[6px_6px_0px_0px_rgba(109,40,217,0.4)] overflow-hidden">
           {/* Header */}
           <div className="px-4 py-3 bg-purple-950/60 border-b border-purple-800/40">
-            <h3 className="text-sm font-semibold text-purple-200">Grant's Assistant</h3>
+            <h3 className="text-sm font-semibold text-purple-200">Amity — Grant's Assistant</h3>
           </div>
 
           {/* Messages */}
