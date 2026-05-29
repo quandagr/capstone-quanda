@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import ProductForm from './components/ProductForm'
 import ProductTable from './components/ProductTable'
 import EditModal from './components/EditModal'
+import Chatbot from './components/Chatbot'
 
 export default function App() {
   const [products, setProducts] = useState([])
@@ -182,6 +183,9 @@ export default function App() {
           {toast.message}
         </div>
       )}
+
+      {/* Chatbot */}
+      <Chatbot />
     </div>
   )
 }

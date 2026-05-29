@@ -31,7 +31,10 @@ def db_init():
     # Add color and size columns if they don't exist yet
     cur.execute("""
         alter table products
-        add column if not exists color varchar(50),
+        add column if not exists color varchar(50)
+    """)
+    cur.execute("""
+        alter table products
         add column if not exists size int
     """)
     conn.commit() 

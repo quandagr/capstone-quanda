@@ -19,5 +19,13 @@ def get_health():
     return jsonify({"message": "Server Online"}) , 200
 
 
+@app.route("/webhook", methods=["POST"])
+def webhook():
+    """Endpoint for n8n to send data into this app."""
+    data = request.get_json()
+    print(f"[WEBHOOK] Received: {data}")
+    return jsonify({"message": "Webhook received", "data": data}), 200
+
+
 if __name__ == "__main__":
     app.run(debug=True)
