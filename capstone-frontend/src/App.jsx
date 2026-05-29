@@ -184,7 +184,7 @@ export default function App() {
         </div>
       )}
 
-      {/* Chatbot */}
+      {/* Chatbot - NOTE: This is NOT connected to n8n. It queries the Flask API directly. */}
       <Chatbot />
     </div>
   )
